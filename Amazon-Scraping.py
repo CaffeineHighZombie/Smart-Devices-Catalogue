@@ -1,6 +1,7 @@
 #!usr/bin/env python
 
 import hmac, hashlib, base64
+from time import strftime, gmtime
 
 class AWSSigner:
 
@@ -16,7 +17,14 @@ class AWSSigner:
 
 AWSRequest = AWSSigner('QcfpCpzijMjttVfdwcokL2Q5NcDWpZRRShHP0KgL')
 
-data = """http://webservices.amazon.com/onca/xml?AWSAccessKeyId=AKIAINYUQ3YAQIKQONCA&AssociateTag=saranyaraj432-20&Keywords=Microsoft&Operation=ItemSearch&ResponseGroup=Images%2CItemAttributes%2COffers&SearchIndex=Software&Service=AWSECommerceService&Timestamp=2017-07-11T04%3A35%3A51.000Z"""
+#timestamp = strftime("%Y-%m-%dT%H:%M:%SZ", gmtime())
 
+data = """GET
+webservices.amazon.com
+/onca/xml
+AWSAccessKeyId=AKIAINYUQ3YAQIKQONCA&AssociateTag=saranyaraj432-20&Keywords=Microsoft&Operation=ItemSearch&ResponseGroup=Images%2CItemAttributes%2COffers&SearchIndex=Software&Service=AWSECommerceService&Timestamp=2017-07-11T10%3A26%3A51.000Z"""
+
+#print(timestamp.encode())
 print(AWSRequest.sign(data))
+
 
